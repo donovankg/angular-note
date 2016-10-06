@@ -1,0 +1,51 @@
+.toNote{
+    padding: 0 0 0 5px;
+  margin: 10px;
+}
+.listNotes{
+  margin: 5px;
+  box-shadow: 5px 5px 5px black;
+  float: left;
+  border-radius: 5px;
+  padding: 0 0 0 5px;
+  background: red;
+  height: 300px;
+  width: 600px;
+  border: 1px solid black;
+}
+.noteContent{
+  border: 1px solid black;
+  box-shadow: 5px 5px 5px black;
+  border-radius: 5px;
+  padding: 5px;
+  background: green;
+  height: 220px;
+  width: 580px;
+}
+.noteDate{
+  padding: 0 0 0 5px;
+  background: lightblue;
+  margin: 0;
+}
+.noteEditeDate{
+  padding: 0 0 0 5px;
+  background: orange;
+  margin: 0;
+}
+.btnBox{
+margin: -35px 20px 0 0;
+}
+.btnEdit{
+  border-radius: 5px;
+  margin: 4px;
+  background: lightgreen;
+  float: right;
+  box-shadow: 5px 5px 5px black;
+}
+.btnDelete{
+  border-radius: 5px;
+  margin: 4px;
+  background: red;
+  float: right;
+  box-shadow: 5px 5px 5px black;
+}
