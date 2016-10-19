@@ -15,7 +15,7 @@ angular.module("toNote", [])
     .controller("getNotesCtrl", function($scope) {
       console.log('2');
         scope = $scope;
-        //request from localhost:3000/notes
+        $scope.notes = [];
 
         $scope.deleteItem = function() {
 
