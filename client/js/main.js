@@ -1,4 +1,5 @@
 angular.module("toNote", [])
+  .constant("notesUrl", "http://localhost:3000/notes")
 .controller("addNoteCtrl", function($scope) {
   console.log('loaded');
     $scope.addItem = function() {
@@ -12,10 +13,20 @@ angular.module("toNote", [])
           //set this
     }
 })
-    .controller("getNotesCtrl", function($scope) {
+    .controller("getNotesCtrl", function($scope, $http, notesUrl) {
       console.log('2');
         scope = $scope;
-        $scope.notes = [];
+        $http.get(notesUrl)
+        .then(function(res){
+          self.notes = res.data;
+          $scope.notes = self.notes;
+        })
+        .catch(function(error){
+          error = error;
+        });
+
+
+
 
         $scope.deleteItem = function() {
 

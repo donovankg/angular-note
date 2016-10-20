@@ -12,9 +12,19 @@ angular.module("toNote", [])
           //set this
     }
 })
-    .controller("getNotesCtrl", function($scope) {
-      console.log('2');
+    .controller("getNotesCtrl", function($http, $scope) {
+
+        console.log('test');
+        $http.get()
+        .then(function(res){
+          self.notes = res.data;
+        })
+        .catch(function(error){
+          console.log('error happened in load notes');
+        })
+
         scope = $scope;
+
         //request from localhost:3000/notes
 
         $scope.deleteItem = function() {
