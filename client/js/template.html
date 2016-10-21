@@ -1,12 +1,12 @@
 
 <div class='listNotes'>
-    <span class='noteId'>{{note.id}}</span> {{note.title}}
+    <span class='noteId'>{{note._id}}</span> {{note.title}}
     <div class='noteContent'> {{note.content}}
     </div>
     <p class='noteDate'>{{note.date}}</p>
     <p class='noteEditeDate'>{{note.editDate}}</p>
     <div class='btnBox'>
-        <button class='btnDelete' ng-click='deleteItem(notes)'>Delete</button>
+        <button class='btnDelete' ng-click='deleteItem(note._id, $index, $event)'>Delete</button>
         <button class='btnEdit' ng-click='editItem(notes)'>Edit</button>
     </div>
 </div>

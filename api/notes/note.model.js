@@ -2,10 +2,6 @@ var mongoose = require('mongoose');
 var noteSchema = new mongoose.Schema({
   //add whats needed for each note{
 
-  id:{
-    type: String,
-    required: true
-  },
   title:{
     type: String,
     required: false

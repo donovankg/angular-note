@@ -29,8 +29,9 @@ angular.module("toNote", [])
 
         $scope.deleteItem = function() {
 
-            console.log('will delete target item');
-            // var targetSet = event.target.parentNode.parentNode.firstChild.textContent;
+            //console.log('will delete target item');
+            var targetSet = event.target.parentNode.parentNode.firstChild.textContent;
+            console.log(targetSet);
             // for (var key in $scope.notes) {
             //     if (targetSet == $scope.notes[key].id) {
             //         console.log('deleted Id ' + key);
