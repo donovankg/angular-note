@@ -8,7 +8,7 @@ router.get('/', function(req, res, next){
   next();
 }, controller.getAll);
 router.post('/', controller.create);
-router.put('/', controller.save);
+//router.put('/', controller.save);
 router.delete('/', controller.delete);
 
 module.exports = router;
