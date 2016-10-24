@@ -27,6 +27,7 @@ app.use(bodyParser.json());
 //Router
 app.use('/notes',notes);
 
+
 //default router
 app.use('/', function(req, res, next){
 //req  = request

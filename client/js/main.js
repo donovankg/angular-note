@@ -35,8 +35,7 @@ angular.module("toNote", [])
             });
     })
 
-    .directive("listNotes", function($http) {
-var testNotes = "http://localhost:3000/notes";
+    .directive("listNotes", function($http, notesUrl) {
         return {
             templateUrl: "js/template.html",
             restrict: "E",
@@ -45,35 +44,36 @@ var testNotes = "http://localhost:3000/notes";
                 scope.deleteItem = function(id, index, event, note) {
                   //console.log(scope.note._id);
                     //console.log(scope, element, attr);
-                    console.log(scope.note._id);
-                    delete (scope.note._id)
-                  //  scope.notes.splice(scope.notes.indexOf(scope.note._id), 1)
+                    console.log(scope.note);
+                    //  console.log(scope);
+                    //scope.notes.splice(scope.notes.indexOf(scope.note._id), 1)
                         //  console.log(id, index, event)
                     //console.log(notes);
                     //console.log(scope.note._id);
                     //   delete scope.note;
 
-                    //  element[0].remove(); //delete from the page
+                      element[0].remove(); //delete from the page
                     //       console.log(notes);
                 }
-                scope.editItem = function(theId) {
-                  console.log(scope.note)
+                editItem = function(res, req, next) {
+                  //console.log(scope.note)
+                //  var id = req.body._id;
+                console.log(res);
+                console.log(req);
+          //        console.log(id);
+
                   var editNote = {
 //                      "_id": theId,
-                      "_v": scope.note.__v,
                       "title": "test title  1",
                       "content": "test content 1",
                       "date": scope.note.date,
                       "editDate": new Date()
                   }
-                    console.log(editNote);
 
-
-                    // $http.put(testNotes, editNote).then(function(data) {
-                    //   //this is making a new isntance I think
-                    //     scope.ServerResponse = data;
-                    //     self.notes.push(editNote);
-                    //     scope.displayMode = "list";
+//                  console.log(scope.note._id)
+                    // $http.put(notesUrl+'/'+scope.note._id, editNote).then(function(data) {
+                    //
+                    //
                     // }).catch(function() {
                     //     console.log('catch')
                     // })
