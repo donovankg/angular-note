@@ -24,14 +24,26 @@ angular.module("toNote", ['ngResource'])
             //set this
         }
     })
-    .controller("getNotesCtrl", function($scope, $http, notesUrl) {
+    .controller("getNotesCtrl", function($scope, $http, notesUrl, noteService) {
+      var self =this;
+      self.createNote= noteService.createNote;
+      self.deleteNote= noteService.deleteNote;
+      self.updateNote= noteService.createNote;
 
-        scope = $scope;
+      self.startEdit = function (note) {
+          self.editedNote = note;
+        }
+      self.cancelEdit = function () {
+          self.editedProduct = null;
+        }
+
+        self.products=noteService.getAll();
+
         $http.get(notesUrl)
             .then(function(res) {
 
                 self.notes = res.data;
-                scope.notes = self.notes;
+              //  $scope.notes = self.notes;
             })
             .catch(function(error) {
                 error = error;
@@ -65,25 +77,9 @@ angular.module("toNote", ['ngResource'])
         }
     }
     })
-    .controller("noteCtrl", function (noteService) {
-        var self =this;
-        self.createNote= noteService.createNote;
-        self.deleteNote= noteService.deleteNote;
-        self.updateNote= noteService.createNote;
-        self.startEdit = function (note) {
-            self.editedNote = note;
-          }
-        self.cancelEdit = function () {
-            self.editedProduct = null;
-          }
-
-          self.products=noteService.getAll();
-
-    })
     .factory("noteService",function($resource, notesUrl){
       var notesResource = $resource(notesUrl + ":id", { id: "@_id" });
       var notes=notesResource.query();
-
       var deleteNote = function (note) {
             note.$delete().then(function () {
                 notes.splice(self.notes.indexOf(product), 1);
@@ -102,7 +98,7 @@ angular.module("toNote", ['ngResource'])
       return {
         getAll:function(){
 
-          console.log(notes);
+          console.log('promise notes',notes);
           return notes;
 
         },
