@@ -1,5 +1,8 @@
-angular.module("toNote", [])
+angular.module("toNote", ['ngResource'])
     .constant("notesUrl", "http://localhost:3000/notes")
+    .config(function($httpProvider) {
+    $httpProvider.defaults.withCredentials = true;
+})
     .controller("addNoteCtrl", function($scope, $http, notesUrl) {
         console.log('loaded');
         $scope.addItem = function(note) {
@@ -11,13 +14,13 @@ angular.module("toNote", [])
                 "editDate": ""
             }
             $http.post(notesUrl, newNote).then(function(req, res, data) {
-
-                self.notes.push(newNote);
+//                self.notes.push(newNote);
+          console.log(req);
                 $scope.displayMode = "list";
             }).catch(function() {
                 console.log('catch')
             })
-            console.log('add a new note');
+
             //set this
         }
     })
@@ -34,55 +37,78 @@ angular.module("toNote", [])
                 error = error;
             });
     })
-
     .directive("listNotes", function($http, notesUrl) {
+
         return {
+
             templateUrl: "js/template.html",
             restrict: "E",
             link: function(scope, element, attr) {
                 //add a service, then add $resource into it
-                scope.deleteItem = function(id, index, event, note) {
-                  //console.log(scope.note._id);
-                    //console.log(scope, element, attr);
-                    console.log(scope.note);
-                    //  console.log(scope);
-                    //scope.notes.splice(scope.notes.indexOf(scope.note._id), 1)
-                        //  console.log(id, index, event)
-                    //console.log(notes);
-                    //console.log(scope.note._id);
-                    //   delete scope.note;
 
-                      element[0].remove(); //delete from the page
-                    //       console.log(notes);
-                }
-                editItem = function(res, req, next) {
-                  //console.log(scope.note)
-                //  var id = req.body._id;
-                console.log(res);
-                console.log(req);
-          //        console.log(id);
+                scope.deleteItem = function(id, index, event) {
+                  console.log('new stuff',id, index, event)
 
-                  var editNote = {
-//                      "_id": theId,
-                      "title": "test title  1",
-                      "content": "test content 1",
-                      "date": scope.note.date,
-                      "editDate": new Date()
-                  }
+                  var itemToDelete,
+                      deleteThis = id;
 
-//                  console.log(scope.note._id)
-                    // $http.put(notesUrl+'/'+scope.note._id, editNote).then(function(data) {
-                    //
-                    //
-                    // }).catch(function() {
-                    //     console.log('catch')
-                    // })
+                    $http.get('/notesUrl', notes)
+                        .then(function(val) {
+                          console.log('------>notes here',notes);
+                            itemToDelete =  val;
+                        }).catch(function(err) {
+                            return err.stack;
+                        })
 
-
-                  //  console.log(notesUrl);
-//                    .constant("notesUrl", "http://localhost:3000/notes")
-                    scope.notes = self.notes;
-                }
+                scope.notes = self.notes;
             }
         }
+    }
+    })
+    .controller("noteCtrl", function (noteService) {
+        var self =this;
+        self.createNote= noteService.createNote;
+        self.deleteNote= noteService.deleteNote;
+        self.updateNote= noteService.createNote;
+        self.startEdit = function (note) {
+            self.editedNote = note;
+          }
+        self.cancelEdit = function () {
+            self.editedProduct = null;
+          }
+
+          self.products=noteService.getAll();
+
+    })
+    .factory("noteService",function($resource, notesUrl){
+      var notesResource = $resource(notesUrl + ":id", { id: "@_id" });
+      var notes=notesResource.query();
+
+      var deleteNote = function (note) {
+            note.$delete().then(function () {
+                notes.splice(self.notes.indexOf(product), 1);
+            });
+      }
+      var createNote = function (note) {
+            new notesResource(product).$save().then(function (newNote) {
+                notes.push(newNote);
+                editedNote = null;
+            });
+      }
+      var updateNote = function (note) {
+          note.$save();
+          editedNote = null;
+      }
+      return {
+        getAll:function(){
+
+          console.log(notes);
+          return notes;
+
+        },
+        deleteNote:deleteNote,
+        createNote:createNote,
+        updateNote:updateNote
+      }
+
     });

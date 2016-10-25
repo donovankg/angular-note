@@ -4,11 +4,10 @@ require('./seed');
 var router = express.Router();
 
 router.get('/', function(req, res, next){
-  console.log("authentucation is done here");
   next();
 }, controller.getAll);
-router.post('/', controller.create);
-//router.put('/', controller.save);
-router.delete('/', controller.delete);
 
+router.post('/', controller.create);
+//router.get('/:id', controller.save});
+router.delete('/:id', controller.delete);
 module.exports = router;

@@ -30,6 +30,7 @@ app.use('/notes',notes);
 
 //default router
 app.use('/', function(req, res, next){
+  
 //req  = request
   //the request Object
 //res = response
