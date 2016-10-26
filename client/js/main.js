@@ -1,10 +1,9 @@
 angular.module("toNote", ['ngResource'])
-    .constant("notesUrl", "http://localhost:3000/notes")
+    .constant("notesUrl", "http://localhost:3000/notes/")
     .config(function($httpProvider) {
-    $httpProvider.defaults.withCredentials = true;
-})
-    .controller("addNoteCtrl", function($scope, $http, notesUrl) {
-        console.log('loaded');
+        $httpProvider.defaults.withCredentials = true;
+    })
+    .controller("addNoteCtrl", function($scope, notesUrl, noteService) {
         $scope.addItem = function(note) {
             var newDate = new Date();
             var newNote = {
@@ -13,41 +12,22 @@ angular.module("toNote", ['ngResource'])
                 "date": newDate,
                 "editDate": ""
             }
-            $http.post(notesUrl, newNote).then(function(req, res, data) {
-//                self.notes.push(newNote);
-          console.log(req);
-                $scope.displayMode = "list";
-            }).catch(function() {
-                console.log('catch')
-            })
-
-            //set this
+            noteService.createNote(newNote)
         }
     })
     .controller("getNotesCtrl", function($scope, $http, notesUrl, noteService) {
-      var self =this;
-      self.createNote= noteService.createNote;
-      self.deleteNote= noteService.deleteNote;
-      self.updateNote= noteService.createNote;
+        var self = this;
 
-      self.startEdit = function (note) {
-          self.editedNote = note;
-        }
-      self.cancelEdit = function () {
-          self.editedProduct = null;
-        }
-
-        self.products=noteService.getAll();
-
-        $http.get(notesUrl)
-            .then(function(res) {
-
-                self.notes = res.data;
-              //  $scope.notes = self.notes;
-            })
-            .catch(function(error) {
-                error = error;
-            });
+        self.createNote = noteService.createNote;
+        self.deleteNote = noteService.deleteNote;
+        self.updateNote = noteService.updateNote;
+        self.notes = noteService.getAll();
+        // self.startEdit = function(note) {
+        //     self.editedNote = note;
+        // }
+        // self.cancelEdit = function() {
+        //     self.editedNote = null;
+        // }
     })
     .directive("listNotes", function($http, notesUrl) {
 
@@ -59,52 +39,45 @@ angular.module("toNote", ['ngResource'])
                 //add a service, then add $resource into it
 
                 scope.deleteItem = function(id, index, event) {
-                  console.log('new stuff',id, index, event)
+                    console.log('new stuff', id, index, event)
 
-                  var itemToDelete,
-                      deleteThis = id;
-
-                    $http.get('/notesUrl', notes)
-                        .then(function(val) {
-                          console.log('------>notes here',notes);
-                            itemToDelete =  val;
-                        }).catch(function(err) {
-                            return err.stack;
-                        })
-
-                scope.notes = self.notes;
+                    var itemToDelete,
+                        deleteThis = id;
+                }
             }
         }
-    }
     })
-    .factory("noteService",function($resource, notesUrl){
-      var notesResource = $resource(notesUrl + ":id", { id: "@_id" });
-      var notes=notesResource.query();
-      var deleteNote = function (note) {
-            note.$delete().then(function () {
-                notes.splice(self.notes.indexOf(product), 1);
+//    <button class='btnDelete' ng-click='deleteNote(gnc.note)'>Delete</button>
+
+    .factory("noteService", function($resource,notesUrl) {
+        var notesResource = $resource(notesUrl + ":id", {
+            id: "@_id"
+        });
+        var notes = notesResource.query();
+        var deleteNote = function(note) {
+            console.log("delete hit on :",note );
+            note.$delete().then(function() {
+                notes.splice(notes.indexOf(note), 1);
             });
-      }
-      var createNote = function (note) {
-            new notesResource(product).$save().then(function (newNote) {
-                notes.push(newNote);
+        }
+        var createNote = function(note) {
+            new notesResource(note).$save().then(function(value) {
+                notes.push(value);
                 editedNote = null;
             });
-      }
-      var updateNote = function (note) {
-          note.$save();
-          editedNote = null;
-      }
-      return {
-        getAll:function(){
-
-          console.log('promise notes',notes);
-          return notes;
-
-        },
-        deleteNote:deleteNote,
-        createNote:createNote,
-        updateNote:updateNote
-      }
+        }
+        var updateNote = function(note) {
+            note.$save();
+            editedNote = null;
+        }
+        var getAll = function() {
+            return notes;
+        }
+        return {
+            deleteNote: deleteNote,
+            createNote: createNote,
+            updateNote: updateNote,
+            getAll: getAll
+        }
 
     });

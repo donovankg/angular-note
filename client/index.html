@@ -20,10 +20,7 @@
         </header>
         <div ng-app="toNote" class="toNote">
             <div class="mainbox" ng-controller="getNotesCtrl as gnc">
-
-
                 <div ng-repeat="note in gnc.notes">
-
                     <div class='listNotes panel panel-default .container-fluid'>
                         <span class='noteId'>{{note._id}}</span> {{note.title}}
                         <div class='noteContent'> {{note.content}}
@@ -31,14 +28,13 @@
                         <p class='noteDate'>created: {{note.date| date:"MM/dd/yyyy @ h:mma"}}</p>
                         <p class='noteEditeDate'>Last edited on: {{note.editDate | date:"MM/dd/yyyy @ h:mma"}}</p>
                         <div class='btnBox'>
-                            <button class='btnDelete' ng-click='deleteNote(gnc.note)'>Delete</button>
+                            <button class='btnDelete' ng-click='gnc.deleteNote(note)'>Delete</button>
                             <button class='btnEdit' ng-click='editNote'>Edit</button>
                         </div>
                     </div>
                 </div>
-
-
                 <list-notes ng-repeat="note in notes"></list-notes>
+
             </div>
         </div>
 

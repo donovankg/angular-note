@@ -35,8 +35,8 @@ module.exports={
     })
   },
   delete: function(req,res,next){
-        var id = req.body._id;
-        console.log('new id from note.control ',id);
+        var id = req.params.id;
+        console.log('new id from note.control ', id);
         note.find({_id:id}).remove()
             .then(function(){
                 res.send("note deleted")
