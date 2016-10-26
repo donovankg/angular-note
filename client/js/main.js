@@ -72,7 +72,8 @@ angular.module("toNote", ['ngResource'])
 
         var updateNote = function(note) {
           console.log('update hit on: ',note);
-            note.$save().then(function(){
+          // console.log('value.$save ------->',note.$save());
+             note.$save().then(function(){
               console.log('update it');
             });
 
