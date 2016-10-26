@@ -7,11 +7,13 @@ angular.module("toNote", ['ngResource'])
         $scope.addItem = function(note) {
             var newDate = new Date();
             var newNote = {
-                "title": "title 1",
-                "content": "content 1",
+                "title": txtTitle.value,
+                "content": txtArea.value,
                 "date": newDate,
                 "editDate": ""
             }
+            txtTitle.value ="";
+            txtArea.value="";
             noteService.createNote(newNote)
         }
     })
@@ -21,13 +23,14 @@ angular.module("toNote", ['ngResource'])
         self.createNote = noteService.createNote;
         self.deleteNote = noteService.deleteNote;
         self.updateNote = noteService.updateNote;
+        console.log(self.updateNote);
         self.notes = noteService.getAll();
-        // self.startEdit = function(note) {
-        //     self.editedNote = note;
-        // }
-        // self.cancelEdit = function() {
-        //     self.editedNote = null;
-        // }
+        self.startEdit = function(note) {
+            self.editedNote = note;
+        }
+        self.cancelEdit = function() {
+            self.editedNote = null;
+        }
     })
     .directive("listNotes", function($http, notesUrl) {
 
@@ -66,8 +69,13 @@ angular.module("toNote", ['ngResource'])
                 editedNote = null;
             });
         }
+
         var updateNote = function(note) {
-            note.$save();
+          console.log('update hit on: ',note);
+            note.$save().then(function(){
+              console.log('update it');
+            });
+
             editedNote = null;
         }
         var getAll = function() {

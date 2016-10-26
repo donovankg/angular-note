@@ -12,24 +12,39 @@
     <script src="js/main.js"></script>
 
     <body ng-displayMode=="list">
-        <header class="addNoteBox" ng-controller="addNoteCtrl as anc">
-            <button type="button" ng-click="addItem(notes)">Add new Note</button>
-            <p>
-                Angular To-Note
-            </p>
+        <header class="addNoteBox" ng-controller="addNoteCtrl as anc" ng-clean>
+                <button ng-click="showme=true">Add new Note</button>
+                <button ng-click="showme=false" > finished adding notes</button>
+
+            <!--new note box -->
+            <div class="newNote " ng-show="showme" ng-controller="addNoteCtrl as anc">
+                <label for="title">
+                  title<br>
+                  <input type="textbox" name="name" value="" id="txtTitle">
+                </label>
+                <label for="content">
+                  content<br>
+                  <textarea id="txtArea"class ="txta" type="textbox" name="name"></textarea>
+                </label>
+                <button ng-click=" addItem(notes)" > Add new Note</button>
+
+                <br>
+
+            </div>
+            <!-- end new note box-->
         </header>
         <div ng-app="toNote" class="toNote">
             <div class="mainbox" ng-controller="getNotesCtrl as gnc">
                 <div ng-repeat="note in gnc.notes">
                     <div class='listNotes panel panel-default .container-fluid'>
-                        <span class='noteId'>{{note._id}}</span> {{note.title}}
+                        {{note.title}}
                         <div class='noteContent'> {{note.content}}
                         </div>
                         <p class='noteDate'>created: {{note.date| date:"MM/dd/yyyy @ h:mma"}}</p>
                         <p class='noteEditeDate'>Last edited on: {{note.editDate | date:"MM/dd/yyyy @ h:mma"}}</p>
                         <div class='btnBox'>
                             <button class='btnDelete' ng-click='gnc.deleteNote(note)'>Delete</button>
-                            <button class='btnEdit' ng-click='editNote'>Edit</button>
+                            <button class='btnEdit' ng-click='gnc.updateNote(note)'>Edit</button>
                         </div>
                     </div>
                 </div>

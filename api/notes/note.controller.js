@@ -16,8 +16,6 @@ module.exports={
     console.log(id);
     note.find({_id:id})
     .then(function(data){
-      console.log("-------> THIS IS IN NOTE.CONTROLLER", data)
-      // res.status(200).send(note);
     }).catch(function(err){
       console.error(err.stack);
       next(err);
@@ -47,10 +45,11 @@ module.exports={
             })
   },
   save: function(req, res, next){
-    console.log('test');
-    var id = req.body._id;
 
-    Note.findOneAndUpdate({_id:id},req.body,{upsert:true, new:true})
+    var id = req.params.id;
+    console.log('ID form edit / save; l 50----->',id)
+    Note.findOneAndUpdate({_id:id},
+      req.params,{upsert:true, new:true})
     .then(function(notes){
       console.log(notes)
       res.send(notes)
