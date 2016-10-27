@@ -20,22 +20,21 @@
             <div class="newNote " ng-show="showme">
                 <label for="title">
                   title<br>
-                  <input type="textbox" name="name" value="" id="txtTitle">
+                  <input id="txtTitle" type="textbox" name="name" value="" >
                 </label>
                 <label for="content">
                   content<br>
                   <textarea id="txtArea"class ="txta" type="textbox" name="name"></textarea>
                 </label>
-                <button ng-click=" addItem(notes); showme=false"> Add new Note</button>
+                <button ng-click="anc.addItem(notes); showme=false"> Add new Note</button>
 
                 <br>
 
             </div>
             <!-- end new note box-->
-
-
         </header>
-        <div ng-app="toNote" class="toNote">
+
+        <div class="toNote">
             <div class="mainbox" ng-controller="getNotesCtrl as gnc">
                 <div ng-repeat="note in gnc.notes">
                     <div>
@@ -48,23 +47,28 @@
                                 <p class='noteEditeDate'>Last edited on: {{note.editDate | date:"MM/dd/yyyy @ h:mma"}}</p>
                                 <div class='btnBox'>
                                     <button class='btnDelete' ng-click='gnc.deleteNote(note)'>Delete</button>
-                                    <button class='btnEdit' ng-click='gnc.updateNote(note); editMode=true'>Edit</button>
+                                    <button class='btnEdit' ng-click='editMode=true'>Edit</button>
                                 </div>
                             </div>
                             <!-- edit note -->
                             <div ng-show="editMode">
-                                <input ng-model="gnc.editedNote.name" required id="editName" />
-                                <input ng-model="gnc.editedNote.content" required id="editContent" />
 
-                                <button ng-hide="gnc.editedNote.id" ng-click="gnc.updateNote(ngc.editedNote); editMode=false" class="btn btn-xs btn-primary">
+
+                                <label for="title">Note Title:
+                                  <input type="text" id="editName" ng-model="note.title" required/>
+                                </label><br>
+                                <label for="content">
+                                  Note Content:
+                                  <input type="text" id="editContent" ng-model="note.content" required/>
+                                </label>
+                                <br>
+                                <button ng-hide="gnc.editedNote.id" ng-click="gnc.updateNote(note); editMode=false" class="btn btn-xs btn-primary">
                                   Update
                                 </button>
                             </div>
                             <!-- end edit note-->
                         </div>
-
                     </div>
-
                 </div>
 
 

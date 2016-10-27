@@ -8,6 +8,6 @@ router.get('/', function(req, res, next){
 }, controller.getAll);
 
 router.post('/', controller.create);
-router.put('/:id', controller.save);
+router.post('/:id', controller.save);
 router.delete('/:id', controller.delete);
 module.exports = router;

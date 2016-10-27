@@ -45,11 +45,11 @@ module.exports={
             })
   },
   save: function(req, res, next){
-    console.log('save function fired ------>');
+    // console.log('save function fired ------>');
     var id = req.params.id;
-    console.log('ID form edit / save; l 50----->',id)
+    // console.log('ID form edit / save; l 50----->',id)
     note.findOneAndUpdate({_id:id},
-      req.params,{upsert:true, new:true})
+      req.body,{upsert:true, new:true})
     .then(function(notes){
       console.log(notes)
       res.send(notes)
