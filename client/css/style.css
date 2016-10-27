@@ -24,6 +24,11 @@ border-radius: 5px;
   width: 300px;
   box-shadow: inset 0 0 10px #000000;
 }
+#editContent{
+    width: 500px;
+    height: 160px;
+    resize: none;
+}
 input{
   border-radius: 5px;
     box-shadow: inset 0 0 10px #000000;

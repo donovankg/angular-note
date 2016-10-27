@@ -24,7 +24,7 @@
                 </label>
                 <label for="content">
                   content<br>
-                  <textarea id="txtArea"class ="txta" type="textbox" name="name"></textarea>
+                  <textarea id="txtArea"class ="txta" type="textArea" name="name"></textarea>
                 </label>
                 <button ng-click="anc.addItem(notes); showme=false"> Add new Note</button>
 
@@ -54,14 +54,14 @@
                             <div ng-show="editMode">
 
 
-                                <label for="title">Note Title:
+                                <label for="title">Note Title:<br>
                                   <input type="text" id="editName" ng-model="note.title" required/>
                                 </label><br>
                                 <label for="content">
-                                  Note Content:
-                                  <input type="text" id="editContent" ng-model="note.content" required/>
+                                  Note Content:<br>
+                                  <textarea type="text" id="editContent" ng-model="note.content" required></textarea>
                                 </label>
-                                <br>
+                                <br ng-model="note.edit"><br>
                                 <button ng-hide="gnc.editedNote.id" ng-click="gnc.updateNote(note); editMode=false" class="btn btn-xs btn-primary">
                                   Update
                                 </button>
