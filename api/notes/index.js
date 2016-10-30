@@ -3,8 +3,8 @@ var controller = require('./note.controller');
 require('./seed');
 var router = express.Router();
 
-router.get('/', function(req, res, next){
-  next();
+router.get('/', function(req, res, next) {
+    next();
 }, controller.getAll);
 
 router.post('/', controller.create);

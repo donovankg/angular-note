@@ -41,7 +41,7 @@ angular.module("toNote", ['ngResource'])
                 //add a service, then add $resource into it
 
                 scope.deleteItem = function(id, index, event) {
-                    console.log('new stuff', id, index, event)
+                    // console.log('new stuff', id, index, event)
 
                     var itemToDelete,
                         deleteThis = id;
@@ -55,7 +55,7 @@ angular.module("toNote", ['ngResource'])
         var notesResource = $resource(notesUrl + ":id", { id: "@_id" });
         var notes = notesResource.query();
         var deleteNote = function(note) {
-            console.log("delete hit on :",note );
+            // console.log("delete hit on :",note );
             note.$delete().then(function() {
                 notes.splice(notes.indexOf(note), 1);
             });
@@ -69,11 +69,11 @@ angular.module("toNote", ['ngResource'])
         }
 
         var updateNote = function(data) {
-          console.log('FACTORY update hit on: ',data);
-
+          // console.log('FACTORY update hit on: ',data);
+          data.editDate = new Date()
           // console.log('value.$save ------->',note.$save());
             data.$save().then(function(newNote){
-              console.log(newNote)
+              // console.log(newNote)
             });
             editedNote = null;
         }

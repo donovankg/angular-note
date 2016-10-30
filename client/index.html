@@ -11,10 +11,20 @@
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="js/main.js"></script>
 
-    <body ng-displayMode=="list">
-        <header class="addNoteBox" ng-controller="addNoteCtrl as anc" ng-clean>
-            <button ng-click="showme=true" ng-hide="showme">Add new Note</button>
 
+    <link href="https://fonts.googleapis.com/css?family=Gravitas+One" rel="stylesheet">
+
+
+    <body ng-displayMode=="list">
+        <div class="addNoteBox" ng-controller="addNoteCtrl as anc" ng-clean>
+
+
+            <header>
+                <button class="addNote" ng-click="showme=true" ng-hide="showme">Add new Note</button>
+                <p>
+                    To-Do Notes
+                </p>
+            </header>
 
             <!--new note box -->
             <div class="newNote " ng-show="showme">
@@ -22,7 +32,7 @@
                   title<br>
                   <input id="txtTitle" type="textbox" name="name" value="" >
                 </label>
-                <label for="content">
+                <label for="content" class="txtALbl">
                   content<br>
                   <textarea id="txtArea"class ="txta" type="textArea" name="name"></textarea>
                 </label>
@@ -32,37 +42,37 @@
 
             </div>
             <!-- end new note box-->
-        </header>
+        </div>
 
         <div class="toNote">
             <div class="mainbox" ng-controller="getNotesCtrl as gnc">
                 <div ng-repeat="note in gnc.notes">
                     <div>
-                        <div class='listNotes panel panel-default .container-fluid'>
+                        <div class='listNotes'>
                             <div ng-hide="editMode">
                                 {{note.title}}
                                 <div class='noteContent'> {{note.content}}
                                 </div>
                                 <p class='noteDate'>created: {{note.date| date:"MM/dd/yyyy @ h:mma"}}</p>
-                                <p class='noteEditeDate'>Last edited on: {{note.editDate | date:"MM/dd/yyyy @ h:mma"}}</p>
+                                <p class='noteEditeDate'>Edited: {{note.editDate | date:"MM/dd/yyyy @ h:mma"}}</p>
                                 <div class='btnBox'>
                                     <button class='btnDelete' ng-click='gnc.deleteNote(note)'>Delete</button>
                                     <button class='btnEdit' ng-click='editMode=true'>Edit</button>
                                 </div>
                             </div>
                             <!-- edit note -->
-                            <div ng-show="editMode">
+                            <div ng-show="editMode" class="editModeDiv">
 
 
                                 <label for="title">Note Title:<br>
                                   <input type="text" id="editName" ng-model="note.title" required/>
                                 </label><br>
-                                <label for="content">
+                                <label for="content" class="contentLbl">
                                   Note Content:<br>
                                   <textarea type="text" id="editContent" ng-model="note.content" required></textarea>
                                 </label>
                                 <br ng-model="note.edit"><br>
-                                <button ng-hide="gnc.editedNote.id" ng-click="gnc.updateNote(note); editMode=false" class="btn btn-xs btn-primary">
+                                <button ng-hide="gnc.editedNote.id" ng-click="gnc.updateNote(note); editMode=false" class="update">
                                   Update
                                 </button>
                             </div>

@@ -1,78 +1,203 @@
-.toNote{
-    padding: 0 0 0 5px;
-  margin: 10px;
-}
-.newNote{
-  border: 1px solid black;
-  width: 400px;
-  padding: 10px;
-  position: absolute;
-  background: white;
-  border-radius: 5px;
-  box-shadow: 5px 5px 5px black;
-  left:30%;
-}
-.newNote button{
-  float: right;
-  border-radius: 5px;
-  box-shadow: 5px 5px 5px black;
-}
-.txta{
-border-radius: 5px;
-  resize: none;
-  height: 150px;
-  width: 300px;
-  box-shadow: inset 0 0 10px #000000;
-}
-#editContent{
-    width: 500px;
-    height: 160px;
-    resize: none;
-}
-input{
-  border-radius: 5px;
-    box-shadow: inset 0 0 10px #000000;
-}
-.listNotes{
-  margin: 5px;
-  box-shadow: 5px 5px 5px black;
-  float: left;
-  border-radius: 5px;
-  padding: 0 0 0 5px;
-  height: 300px;
-  width: 600px;
-  border: 1px solid black;
-}
-.noteContent{
-  border: 1px solid black;
-  box-shadow: 5px 5px 5px black;
-  border-radius: 5px;
-  padding: 5px;
-  height: 220px;
-  width: 580px;
-}
-.noteDate{
+        .toNote {
+        padding: 0 0 0 5px;
+        margin: 10px;
+    }
 
-  padding: 0 0 0 5px;
-  margin: 5px 0 0 0;
-}
-.noteEditeDate{
-  padding: 0 0 0 5px;
+    .update {
+        float: left;
+        border-radius: 5px;
+        box-shadow: 5px 5px 5px black;
+    }
 
-  margin: 0;
-}
-.btnBox{
-margin: -35px 20px 0 0;
-}
-.btnEdit{
-  border-radius: 5px;
-  margin: 4px;
-  float: right;
-  box-shadow: 5px 5px 5px black;
-}
-.btnDelete{
-  border-radius: 5px;
-  margin: 4px;
-  float: right;
-  box-shadow: 5px 5px 5px black;
-}
+    button {
+        background: #3A607D;
+        color: #E7EDF2;
+    }
+
+    header {
+        height: 55px;
+        background: #BDCDDA;
+        padding: 10px;
+    }
+
+    header p {
+        text-align: center;
+        font-family: 'Gravitas One', cursive;
+        font-size: 1.5em;
+        text-shadow: 2px 2px #8DA6BA;
+    }
+
+    .addNote {
+        float: left;
+        border-radius: 5px;
+        box-shadow: 5px 5px 5px black;
+    }
+
+    .newNote {
+        border: 1px solid black;
+        width: 400px;
+        padding: 10px;
+        position: absolute;
+        background: white;
+        border-radius: 5px;
+        box-shadow: 5px 5px 5px black;
+        background: #8DA6BA;
+        left: 30%;
+    }
+
+    #txtTitle {
+        background: #BDCDDA;
+        box-shadow: 5px 5px 5px black;
+        border-radius: 5px;
+        border: 1px solid black;
+    }
+
+    .newNote button {
+        float: right;
+        border-radius: 5px;
+        box-shadow: 5px 5px 5px black;
+    }
+
+    .txta {
+        border-radius: 5px;
+        background: #BDCDDA;
+        resize: none;
+        height: 150px;
+        width: 300px;
+        box-shadow: 5px 5px 5px black;
+    }
+
+    #editName {
+        background: #BDCDDA;
+        box-shadow: 5px 5px 5px black;
+        border-radius: 5px;
+        border: 1px solid black;
+    }
+
+    #editContent {
+        width: 500px;
+        height: 160px;
+        resize: none;
+        background: #BDCDDA;
+        box-shadow: 5px 5px 5px black;
+        border-radius: 5px;
+        padding: 5px;
+        border: 1px solid black;
+    }
+
+    input {
+        border-radius: 5px;
+        box-shadow: 5px 5px 5px black;
+    }
+
+    .listNotes {
+        margin: 5px;
+        background-color: #8DA6BA;
+        box-shadow: 5px 5px 5px black;
+        float: left;
+        border-radius: 5px;
+        padding: 0 0 0 5px;
+        height: 300px;
+        width: 600px;
+        border: 1px solid black;
+    }
+
+    .noteContent {
+        border: 1px solid black;
+        background: #BDCDDA;
+        box-shadow: 5px 5px 5px black;
+        border-radius: 5px;
+        padding: 5px;
+        height: 220px;
+        width: 580px;
+    }
+
+    .noteDate {
+        padding: 0 0 0 5px;
+        margin: 5px 0 0 0;
+    }
+
+    .noteEditeDate {
+        padding: 0 0 0 5px;
+        margin: 0;
+    }
+
+    .btnBox {
+        margin: -35px 20px 0 0;
+    }
+
+    .btnEdit {
+        border-radius: 5px;
+        margin: 4px;
+        float: right;
+        box-shadow: 5px 5px 5px black;
+    }
+
+    .btnDelete {
+        border-radius: 5px;
+        margin: 4px;
+        float: right;
+        box-shadow: 5px 5px 5px black;
+    }
+
+    @media screen and (min-width: 830px) {
+        .noteContent {
+            width: 97%;
+        }
+        .listNotes {
+            width: 45%;
+        }
+        .contentLbl {
+            width: 97%;
+        }
+        .editModeDiv {
+            width: 95%;
+        }
+        #editContent {
+            width: 95%;
+        }
+        .newNote {
+            margin: 5px;
+            width: 95%;
+            left: 0;
+        }
+        .txtALbl {
+            width: 95%;
+        }
+        .txta {
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 829px) {
+        .noteContent {
+            width: 97%;
+        }
+        .listNotes {
+            width: 97%;
+        }
+        .contentLbl {
+            width: 97%;
+        }
+        .editModeDiv {
+            width: 95%;
+        }
+        #editContent {
+            width: 95%;
+        }
+        .newNote {
+            margin: 5px;
+            width: 95%;
+            left: 0;
+        }
+        .txtALbl {
+            width: 95%;
+        }
+        .txta {
+            width: 100%;
+        }
+        /*changing things
+@640
+noteContent
+listNote
+*/
